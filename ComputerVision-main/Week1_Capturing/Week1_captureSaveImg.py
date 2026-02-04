@@ -20,6 +20,13 @@ class CaptureSaveImgProcessor:
         Returns:
             bool: True if successful, False otherwise
         """
+        # TODO: Implement image capture and saving
+        # Sinh viên cần:
+        # 1. Kiểm tra bgr_img có hợp lệ không
+        # 2. Lưu ảnh vào thư mục CapturedImage/
+        # 3. Trả về True nếu thành công, False nếu thất bại
+        pass
+    
         try:
             # 1. Kiểm tra ảnh đầu vào có hợp lệ không
             if bgr_img is None or not isinstance(bgr_img, np.ndarray):
@@ -41,4 +48,3 @@ class CaptureSaveImgProcessor:
         except Exception as e:
             print("Error saving image:", e)
             return False
-    
