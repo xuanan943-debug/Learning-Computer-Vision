@@ -127,23 +127,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Apply Filter function
-async function applyFilter(){
-  const cam_id = document.getElementById('effect-camera').value;
-  const filter_type = document.getElementById('effect-filter').value;
-  const capturedImg = document.getElementById(`captured-${cam_id}`);
-  
-  if(!capturedImg.src){
-    alert('Please capture an image first!');
-    return;
-  }
+// Apply Filter function for individual cameras
+async function applyFilterToCamera(cam_id){
+  const filterSelect = document.getElementById(`filter-${cam_id}`);
+  const filter_type = filterSelect.value.trim();
   
   try{
     const res = await fetch('/apply_filter', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        cam_id: parseInt(cam_id),
+        cam_id: cam_id,
         filter_type: filter_type
       })
     });
@@ -154,19 +148,20 @@ async function applyFilter(){
       return;
     }
     
-    const resultImg = document.getElementById('effect-result');
-    const timeBox = document.getElementById('effect-time');
+    const resultImg = document.getElementById(`filter-result-${cam_id}`);
+    const timeBox = document.getElementById(`filter-time-${cam_id}`);
     
     if(j.result && j.result.length > 0){
       resultImg.src = j.result;
-      console.log('Filter applied successfully');
+      console.log(`✓ Filter applied to camera ${cam_id}`);
     }
     
     if(typeof j.process_time_ms === 'number'){
-      timeBox.textContent = 'Processing time: ' + j.process_time_ms.toFixed(2) + ' ms';
+      timeBox.textContent = `Filter time: ${j.process_time_ms.toFixed(2)} ms`;
     }
   }catch(err){
     alert('Error: ' + err);
     console.error('Filter error:', err);
   }
 }
+

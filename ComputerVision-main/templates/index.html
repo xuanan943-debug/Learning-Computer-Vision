@@ -33,6 +33,29 @@
         <img id="fragment-1" src="" alt="fragment" />
         <div class="process-meta" id="proc-time-1">Process time: --</div>
       </div>
+
+      <div class="filter-controls">
+        <h3>Apply Filter</h3>
+        <select id="filter-1">
+          <option value="grayscale">Grayscale Conversion</option>
+          <option value="gaussian">Gaussian Blur</option>
+          <option value="median">Median Blur</option>
+          <option value="sobel">Sobel Edge Detection (X)</option>
+          <option value="laplacian">Laplacian Edge Detection</option>
+          <option value="sharpening">Sharpening Filter</option>
+          <option value="bilateral">Bilateral Filter</option>
+          <option value="binary_threshold">Binary Thresholding</option>
+          <option value="erosion">Erosion</option>
+          <option value="dilation">Dilation</option>
+        </select>
+        <button onclick="applyFilterToCamera(1)" class="apply-btn">Apply Filter</button>
+      </div>
+
+      <div class="filter-output">
+        <h3>Filter Result</h3>
+        <img id="filter-result-1" src="" alt="filter result" />
+        <div class="process-meta" id="filter-time-1">Filter time: --</div>
+      </div>
     </div>
 
     <!-- Column 2 -->
@@ -59,48 +82,29 @@
         <img id="fragment-2" src="" alt="fragment" />
         <div class="process-meta" id="proc-time-2">Process time: --</div>
       </div>
-    </div>
-  </div>
 
-  <!-- Image Effects Section -->
-  <div class="effects-section">
-    <h2>Image Effects</h2>
-    <div class="effects-controls">
-      <label>Camera</label>
-      <select id="effect-camera">
-        <option value="1">Camera 1</option>
-        <option value="2">Camera 2</option>
-      </select>
+      <div class="filter-controls">
+        <h3>Apply Filter</h3>
+        <select id="filter-2">
+          <option value="grayscale">Grayscale Conversion</option>
+          <option value="gaussian">Gaussian Blur</option>
+          <option value="median">Median Blur</option>
+          <option value="sobel">Sobel Edge Detection (X)</option>
+          <option value="laplacian">Laplacian Edge Detection</option>
+          <option value="sharpening">Sharpening Filter</option>
+          <option value="bilateral">Bilateral Filter</option>
+          <option value="binary_threshold">Binary Thresholding</option>
+          <option value="erosion">Erosion</option>
+          <option value="dilation">Dilation</option>
+        </select>
+        <button onclick="applyFilterToCamera(2)" class="apply-btn">Apply Filter</button>
+      </div>
 
-      <label>Effect</label>
-      <select id="effect-filter">
-        <option value="none">Original</option>
-        <option value="grayscale">Grayscale</option>
-        <option value="gaussian">Gaussian Blur</option>
-        <option value="median">Median Blur</option>
-        <option value="sobel">Sobel Edge Detection</option>
-        <option value="laplacian">Laplacian Edge Detection</option>
-        <option value="canny">Canny Edge Detection</option>
-        <option value="sharpening">Sharpening</option>
-        <option value="bilateral">Bilateral Filter</option>
-        <option value="binary_threshold">Binary Threshold</option>
-        <option value="erosion">Erosion</option>
-        <option value="dilation">Dilation</option>
-        <option value="opening">Morphological Opening</option>
-        <option value="closing">Morphological Closing</option>
-        <option value="histogram_eq">Histogram Equalization</option>
-        <option value="clahe">CLAHE</option>
-        <option value="adaptive_threshold">Adaptive Threshold</option>
-        <option value="contour">Contour Detection</option>
-      </select>
-
-      <button onclick="applyFilter()" class="apply-btn">Apply</button>
-    </div>
-
-    <div class="effect-output">
-      <h3>Effect Output</h3>
-      <img id="effect-result" src="" alt="effect result" />
-      <div class="process-meta" id="effect-time">Processing time: --</div>
+      <div class="filter-output">
+        <h3>Filter Result</h3>
+        <img id="filter-result-2" src="" alt="filter result" />
+        <div class="process-meta" id="filter-time-2">Filter time: --</div>
+      </div>
     </div>
   </div>
 

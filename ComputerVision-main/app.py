@@ -126,6 +126,52 @@ def capture():
     except Exception as e:
         return jsonify({'ok': False, 'error': f'Processing failed: {str(e)}'}), 500
 
+@app.route('/apply_filter', methods=['POST'])
+def apply_filter():
+    """
+    Apply a specific filter to a captured image
+    
+    Payload: { cam_id: int, filter_type: str }
+    
+    Supported filter types:
+        - none, grayscale, gaussian, median, sobel, laplacian, canny
+        - sharpening, bilateral, binary_threshold, erosion, dilation
+        - opening, closing, histogram_eq, clahe, adaptive_threshold, contour
+    """
+    data = request.get_json()
+    cam_id = int(data.get('cam_id'))
+    filter_type = data.get('filter_type', 'grayscale').strip().lower()
+    
+    if cam_id not in cameras:
+        return jsonify({'ok': False, 'error': 'invalid cam_id'}), 400
+    
+    cam = cameras[cam_id]
+    frame = cam.get_frame_bgr()
+    if frame is None:
+        return jsonify({'ok': False, 'error': 'no frame yet'}), 400
+    
+    try:
+        processor = ImageProcessor()
+        filtered_img, process_time_ms = processor.apply_filter(frame, filter_type)
+        
+        # Convert filtered image to base64
+        ret, jpg = cv2.imencode('.jpg', filtered_img, [int(cv2.IMWRITE_JPEG_QUALITY), 90])
+        if not ret:
+            return jsonify({'ok': False, 'error': 'encode_failed'}), 500
+        
+        raw = jpg.tobytes()
+        b64 = base64.b64encode(raw).decode('utf-8')
+        result_uri = 'data:image/jpeg;base64,' + b64
+        
+        return jsonify({
+            'ok': True,
+            'result': result_uri,
+            'process_time_ms': round(process_time_ms, 2),
+            'filter_type': filter_type
+        })
+    except Exception as e:
+        return jsonify({'ok': False, 'error': f'Filter failed: {str(e)}'}), 500
+
 if __name__ == '__main__':
     # debug mode off in production
     app.run(host='0.0.0.0', port=5000, threaded=True)

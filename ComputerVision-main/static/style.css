@@ -106,6 +106,61 @@ h3{
   color:var(--muted);
 }
 
+/* Filter Controls */
+.filter-controls{
+  margin-top:12px;
+  background:white;
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #eee;
+}
+.filter-controls h3{
+  margin:0 0 8px 0;
+}
+.filter-controls select{
+  width:100%;
+  padding:8px;
+  border-radius:4px;
+  border:1px solid #ddd;
+  margin-bottom:8px;
+  font-size:13px;
+}
+.filter-controls .apply-btn{
+  width:100%;
+  padding:8px;
+  background:var(--accent);
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:13px;
+}
+.filter-controls .apply-btn:hover{
+  opacity:0.9;
+}
+
+/* Filter Output */
+.filter-output{
+  margin-top:12px;
+  background:white;
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #eee;
+}
+.filter-output h3{
+  margin:0 0 8px 0;
+}
+#filter-result-1, #filter-result-2{
+  width:100%;
+  height:auto;
+  max-height:240px;
+  object-fit:contain;
+  display:block;
+  background:#f0f0f0;
+  border-radius:4px;
+}
+
 
 /* Effects Section */
 .effects-section{
